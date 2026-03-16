@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME 8 | OFFICIAL GUILD</title>
+    
+    <!-- Gaming Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #ffcc00;
+            --fire: #ff6a00;
+            --dark-bg: #050505;
+            --neon-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Animated Fire Background --- */
+        #particle-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1000 0%, #050505 100%);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255,204,0,0.1);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron';
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron';
+            font-size: clamp(4rem, 15vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff 40%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 0.9;
+            filter: drop-shadow(0 0 30px rgba(255, 106, 0, 0.4));
+            animation: breathe 3s infinite ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 106, 0, 0.3)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(255, 106, 0, 0.6)); }
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* --- JOINING BANNER (Aapki Requirements) --- */
+        .join-banner {
+            background: linear-gradient(90deg, transparent, rgba(255, 106, 0, 0.1), transparent);
+            border-top: 1px solid rgba(255,204,0,0.2);
+            border-bottom: 1px solid rgba(255,204,0,0.2);
+            padding: 40px 20px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .join-banner h2 {
+            font-family: 'Orbitron';
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .join-banner .highlight {
+            color: var(--gold);
+            font-weight: 900;
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        /* --- Stats Section --- */
+        section {
+            padding: 80px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            font-family: 'Orbitron';
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            background: rgba(255, 204, 0, 0.05);
+        }
+
+        .stat-card h3 {
+            font-family: 'Orbitron';
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* --- Contact Section --- */
+        .contact-box {
+            text-align: center;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 60px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-family: 'Orbitron';
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 8px;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+        }
+
+        .btn-minato {
+            background: linear-gradient(45deg, var(--fire), #ff003c);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            color: #555;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border-top: 1px solid #111;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 4rem; }
+            section { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particle-container"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="nav-logo">PRIME 8</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#stats">Overview</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <header class="hero" id="home">
+        <h1 class="hero-title">PRIME 8</h1>
+        <p class="hero-tagline">Elite Territory</p>
+    </header>
+
+    <!-- Joining Requirements Banner -->
+    <div class="join-banner">
+        <h2>WANT TO JOIN OUR GUILD?</h2>
+        <p style="font-size: 1.5rem; letter-spacing: 2px;">
+            REQUIREMENTS ARE <span class="highlight">60+ LEVEL</span> 
+            AND <span class="highlight">PRIME LEVEL 8</span> MUST
+        </p>
+    </div>
+
+    <!-- Guild Stats Section -->
+    <section id="stats">
+        <h2 class="section-header">Guild Power</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>MAX</h3>
+                <p>GUILD LEVEL</p>
+            </div>
+            <div class="stat-card">
+                <h3>100%</h3>
+                <p>ACTIVITY RATE</p>
+            </div>
+            <div class="stat-card">
+                <h3>ELITE</h3>
+                <p>SCRIMS SQUAD</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-box">
+            <h2 class="section-header" style="margin-bottom: 20px;">READY FOR BATTLE?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ccc;">
+                Agar aap requirements poori karte hain, toh aaj hi humari elite community ka hissa banein.
+            </p>
+            <div class="btn-group">
+                <a href="https://chat.whatsapp.com/FEKlWSnXgjrJozkrq45mf9" target="_blank" class="btn btn-wa">Join WhatsApp Group</a>
+                <a href="https://wa.me/923209725835" target="_blank" class="btn btn-minato">Contact MR MINATO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PRIME 8 OFFICIAL | DOMINATING SINCE DAY ONE</p>
+    </footer>
+
+    <!-- Interactive Background Script -->
+    <script>
+        function createFire() {
+            const container = document.getElementById('particle-container');
+            const particle = document.createElement('div');
+            
+            particle.style.position = 'fixed';
+            particle.style.width = Math.random() * 4 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = Math.random() > 0.5 ? '#ffcc00' : '#ff6a00';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.bottom = '-10px';
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = Math.random();
+            particle.style.zIndex = '-1';
+            
+            container.appendChild(particle);
+
+            let speed = Math.random() * 2 + 1;
+            let move = setInterval(() => {
+                particle.style.bottom = (parseFloat(particle.style.bottom) + speed) + 'px';
+                if (parseFloat(particle.style.bottom) > window.innerHeight) {
+                    clearInterval(move);
+                    particle.remove();
+                }
+            }, 30);
+        }
+
+        setInterval(createFire, 100);
+
+        // Simple Parallax
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            const title = document.querySelector('.hero-title');
+            title.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
+
+</body>
+</html>
